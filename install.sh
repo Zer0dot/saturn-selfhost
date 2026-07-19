@@ -16,8 +16,13 @@ REPO="Zer0dot/saturn-selfhost"
 INSTALL_DIR="${SATURN_INSTALL_DIR:-$HOME/.local/bin}"
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/saturn-selfhost"
 
+if [ "$(uname -s)" = "Darwin" ]; then
+    echo "ERROR: this installer is Linux-only. On macOS (Apple Silicon):" >&2
+    echo "  brew tap zer0dot/saturn && brew install saturn" >&2
+    exit 1
+fi
 if [ "$(uname -s)" != "Linux" ]; then
-    echo "ERROR: Linux only for now — macOS is planned." >&2
+    echo "ERROR: Linux only (macOS ships via 'brew install saturn')." >&2
     exit 1
 fi
 ARCH="$(uname -m)"
